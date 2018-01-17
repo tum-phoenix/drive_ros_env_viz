@@ -1,0 +1,15 @@
+<launch>
+    <node name="road_line_viz" pkg="drive_ros_road_viz" type="publish_marker" >
+
+        <!-- topic names -->
+        <remap from="road_in" to="roadLine"/>
+        <remap from="marker_out" to="roadLine_viz"/>
+
+        <!-- output namespace -->
+        <param name="out_ns" type="str" value="roadLineViz" />
+
+        <!-- output frame id -->
+        <param name="out_frame_id" type="str" value="rear_axis_middle_ground" />
+
+    </node>
+</launch>
