@@ -105,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES drive_ros_road_viz
-#  CATKIN_DEPENDS drive_ros_msgs roscpp
+  CATKIN_DEPENDS drive_ros_msgs roscpp
 #  DEPENDS system_lib
 )
 
@@ -143,7 +143,7 @@ add_executable(publish_marker src/publish_marker.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(publish_marker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(publish_marker
