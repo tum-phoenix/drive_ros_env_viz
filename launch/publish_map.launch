@@ -1,0 +1,12 @@
+<launch>
+    <!-- map yaml file -->
+    <arg name="map_yaml" default="$(find drive_ros_road_viz)/map/phoenix_small_track_5000x1940.yaml" />
+
+    <!-- tf frame of map -->
+    <arg name="map_frame" default="map" />
+
+    <!-- map server -->
+    <node name="map_publisher" pkg="map_server" type="map_server" args="$(arg map_yaml)" output="screen">
+        <param name="frame_id" type="str" value="$(arg map_frame)" />
+    </node>
+</launch>

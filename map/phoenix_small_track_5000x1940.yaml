@@ -1,0 +1,6 @@
+image: phoenix_small_track_5000x1940.png
+resolution: 0.00196 # 9.8m / 5000px
+origin: [0.0, 0.0, 0.0]
+occupied_thresh: 0.65
+free_thresh: 0.196
+negate: 1 # looks better (but makes no sense of course)
