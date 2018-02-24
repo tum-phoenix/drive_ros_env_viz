@@ -8,5 +8,6 @@ This is a very simple node which receives a topic from type RoadLine.msg and out
 ## Visualization of map
 This launch files publishes a map using the [map server](http://wiki.ros.org/map_server). Currently the map is only for visualization purposes (occupancy information is not real)!
 
-To use this, make sure that the map server package is installed:
-    sudo apt install ros-<distro>-map-server
+To use this visualization, make sure that the map server package is installed:
+
+`sudo apt install ros-<distro>-map-server`
