@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>drive_ros_road_viz</name>
+  <name>drive_ros_env_viz</name>
   <version>0.0.0</version>
-  <description>The drive_ros_road_viz package</description>
+  <description>The drive_ros_env_viz package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="fabianhanke@todo.todo">fabianhanke</maintainer>
+  <maintainer email="fabian@todo.todo">fabian</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->

@@ -1,6 +1,6 @@
 <launch>
     <!-- map yaml file -->
-    <arg name="map_yaml" default="$(find drive_ros_road_viz)/map/phoenix_small_track_5000x1940.yaml" />
+    <arg name="map_yaml" default="$(find drive_ros_env_viz)/map/phoenix_small_track_5000x1940.yaml" />
 
     <!-- tf frame of map -->
     <arg name="map_frame" default="map" />

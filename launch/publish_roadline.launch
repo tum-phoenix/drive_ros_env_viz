@@ -1,5 +1,5 @@
 <launch>
-    <node name="road_line_viz" pkg="drive_ros_road_viz" type="publish_marker" >
+    <node name="road_line_viz" pkg="drive_ros_env_viz" type="roadline" >
 
         <!-- topic names -->
         <remap from="road_in" to="roadLine"/>
