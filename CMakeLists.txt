@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(drive_ros_env_viz)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -134,6 +134,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(roadline src/roadline.cpp)
+add_executable(obstacles src/obstacles.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -144,11 +145,15 @@ add_executable(roadline src/roadline.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(roadline ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(obstacles ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(roadline
    ${catkin_LIBRARIES}
  )
+target_link_libraries(obstacles
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
@@ -165,7 +170,7 @@ add_dependencies(roadline ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_
 # )
 
 ## Mark executables and/or libraries for installation
- install(TARGETS roadline
+ install(TARGETS roadline obstacles
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

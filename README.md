@@ -11,3 +11,6 @@ This launch files publishes a map using the [map server](http://wiki.ros.org/map
 To use this visualization, make sure that the map server package is installed:
 
 `sudo apt install ros-<distro>-map-server`
+
+## Visualization of Obstacles
+Very simple visualization of the ObstaclesArray.msg and outputs a MarkerArray.

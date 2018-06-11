@@ -1,0 +1,12 @@
+<launch>
+    <node name="obstacle_viz" pkg="drive_ros_env_viz" type="obstacles" >
+
+        <!-- topic names -->
+        <remap from="obstacles_in" to="laser_obstacles"/>
+        <remap from="marker_out"   to="obstacles_viz"/>
+
+        <!-- output namespace -->
+        <param name="out_ns" type="str" value="obstacleViz" />
+
+    </node>
+</launch>

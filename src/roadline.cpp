@@ -3,7 +3,7 @@
 #include "visualization_msgs/Marker.h"
 
 
-ros::Publisher pubMarker;
+ros::Publisher pub_marker;
 std::string out_frame_id;
 std::string out_ns;
 
@@ -52,7 +52,7 @@ void callback(const drive_ros_msgs::RoadLineConstPtr& msg)
     marker.points.push_back(msg->points.at(i).point);
   }
 
-  pubMarker.publish(marker);
+  pub_marker.publish(marker);
 }
 
 int main(int argc, char **argv)
@@ -60,11 +60,11 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "publish_marker");
   ros::NodeHandle nh;
 
-  pubMarker = nh.advertise<visualization_msgs::Marker>("marker_out", 100);
-  ros::Subscriber sub = nh.subscribe("road_in", 100, callback);
-
   nh.param<std::string>("out_frame_id", out_frame_id, "rear_axis_middle_ground");
   nh.param<std::string>("out_ns", out_ns, "roadLineViz");
+
+  pub_marker = nh.advertise<visualization_msgs::Marker>("marker_out", 100);
+  ros::Subscriber sub = nh.subscribe("road_in", 100, callback);
 
   ros::spin();
   return 0;
