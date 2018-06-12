@@ -1,9 +1,13 @@
 <launch>
+    <!-- topic name -->
+    <arg name="obstacle_topic"  default="laser_obstacles" />
+
+
     <node name="obstacle_viz" pkg="drive_ros_env_viz" type="obstacles" >
 
         <!-- topic names -->
-        <remap from="obstacles_in" to="laser_obstacles"/>
-        <remap from="marker_out"   to="obstacles_viz"/>
+        <remap from="obstacles_in" to="$(arg obstacle_topic)"/>
+        <remap from="marker_out"   to="$(arg obstacle_topic)_viz"/>
 
         <!-- output namespace -->
         <param name="out_ns" type="str" value="obstacleViz" />
