@@ -11,10 +11,17 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
 
     int id = 0;
 
+    // delete all previous
+    visualization_msgs::Marker del;
+    del.action = visualization_msgs::Marker::DELETEALL;
+    del.id = id;
+    id ++;
+    obs.markers.push_back(del);
+
     for(auto it = msg->obstacles.begin(); it != msg->obstacles.end(); it++)
     {
+        // draw points
         visualization_msgs::Marker ob;
-
         for(auto pt = it->polygon.points.begin(); pt != it->polygon.points.end(); pt++)
         {
             geometry_msgs::Point gpt;
@@ -33,11 +40,31 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         ob.scale.x = 0.01; // width
         ob.scale.y = 0.01; // height
         ob.color.a = it->trust;
-        ob.color.r = 1.0;
-        ob.color.g = 0.0;
+        ob.color.r = 0.0;
+        ob.color.g = 1.0;
         ob.color.b = 0.0;
+
         id++;
         obs.markers.push_back(ob);
+
+        // draw centroid
+        visualization_msgs::Marker ct;
+        ct.header.stamp = it->header.stamp;
+        ct.header.frame_id = it->header.frame_id;
+        ct.ns = out_ns;
+        ct.id = id;
+        ct.type = visualization_msgs::Marker::SPHERE;
+        ct.action = visualization_msgs::Marker::ADD;
+        ct.pose.position = it->centroid;
+        ct.scale.x = 0.05;
+        ct.scale.y = 0.05;
+        ct.scale.z = 0.05;
+        ct.color.a = it->trust;
+        ct.color.r = 1.0;
+        ct.color.g = 0.0;
+        ct.color.b = 0.0;
+        id++;
+        obs.markers.push_back(ct);
     }
     pub_marker.publish(obs);
 }
