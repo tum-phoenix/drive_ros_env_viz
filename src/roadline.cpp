@@ -5,7 +5,7 @@
 
 ros::Publisher pub_marker;
 std::string out_frame_id;
-std::string out_ns;
+std::string ns;
 
 
 void callback(const drive_ros_msgs::RoadLineConstPtr& msg)
@@ -28,7 +28,7 @@ void callback(const drive_ros_msgs::RoadLineConstPtr& msg)
   visualization_msgs::Marker marker;
   marker.header.frame_id = out_frame_id;
   marker.header.stamp = ros::Time::now();
-  marker.ns = out_ns;
+  marker.ns = ns;
   marker.id = 0;
   marker.type = visualization_msgs::Marker::LINE_STRIP;
   marker.action = visualization_msgs::Marker::ADD;
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
   ros::NodeHandle nh;
 
   nh.param<std::string>("out_frame_id", out_frame_id, "rear_axis_middle_ground");
-  nh.param<std::string>("out_ns", out_ns, "roadLineViz");
+  nh.param<std::string>("out_ns", ns, "roadLineViz");
 
   pub_marker = nh.advertise<visualization_msgs::Marker>("marker_out", 100);
   ros::Subscriber sub = nh.subscribe("road_in", 100, callback);

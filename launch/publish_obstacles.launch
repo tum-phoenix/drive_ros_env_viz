@@ -1,16 +1,20 @@
 <launch>
+
     <!-- topic name -->
-    <arg name="obstacle_topic"  default="laser_obstacles" />
+    <arg name="obstacle_topic"  default="obstacles" />
 
+    <!-- namespace -->
+    <arg name="namespace"       default="obstacle" />
 
-    <node name="obstacle_viz" pkg="drive_ros_env_viz" type="obstacles" >
+    <node name="obstacle_viz_$(arg namespace)" pkg="drive_ros_env_viz" type="obstacles" >
 
         <!-- topic names -->
         <remap from="obstacles_in" to="$(arg obstacle_topic)"/>
         <remap from="marker_out"   to="$(arg obstacle_topic)_viz"/>
 
-        <!-- output namespace -->
-        <param name="out_ns" type="str" value="obstacleViz" />
+        <!-- namespace of marker -->
+        <param name="ns" type="str" value="$(arg namespace)" />
 
     </node>
+
 </launch>
