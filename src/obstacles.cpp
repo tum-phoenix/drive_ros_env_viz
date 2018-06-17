@@ -20,13 +20,13 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
     id ++;
     obs.markers.push_back(del);
 
-    for(auto it = msg->obstacles.begin(); it != msg->obstacles.end(); it++)
+    for(auto it: msg->obstacles)
     {
 
         // determine color
         float r=0.0, g=0.0, b=0.0;
 
-        switch (it->obstacle_type) {
+        switch (it.obstacle_type) {
         case ObsType::TYPE_CAMERA:
             b = 1.0; break;      // blue
         case ObsType::TYPE_LIDAR:
@@ -38,24 +38,24 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
 
         // draw points
         visualization_msgs::Marker ob;
-        for(auto pt = it->polygon.points.begin(); pt != it->polygon.points.end(); pt++)
+        for(auto pt : it.polygon.points)
         {
             geometry_msgs::Point gpt;
-            gpt.x = pt->x;
-            gpt.y = pt->y;
-            gpt.z = pt->z;
+            gpt.x = pt.x;
+            gpt.y = pt.y;
+            gpt.z = pt.z;
             ob.points.push_back(gpt);
         }
 
-        ob.header.stamp = it->header.stamp;
-        ob.header.frame_id = it->header.frame_id;
+        ob.header.stamp = it.header.stamp;
+        ob.header.frame_id = it.header.frame_id;
         ob.ns = ns;
         ob.id = id;
         ob.type = visualization_msgs::Marker::POINTS;
         ob.action = visualization_msgs::Marker::ADD;
         ob.scale.x = 0.01; // width
         ob.scale.y = 0.01; // height
-        ob.color.a = it->trust;
+        ob.color.a = it.trust;
         ob.color.r = r;
         ob.color.g = g;
         ob.color.b = b;
@@ -65,19 +65,19 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
 
         // draw centroid
         visualization_msgs::Marker ct;
-        ct.header.stamp = it->header.stamp;
-        ct.header.frame_id = it->header.frame_id;
+        ct.header.stamp = it.header.stamp;
+        ct.header.frame_id = it.header.frame_id;
         ct.ns = ns;
         ct.id = id;
         ct.type = visualization_msgs::Marker::SPHERE;
         ct.action = visualization_msgs::Marker::ADD;
-        ct.pose.position.x = it->centroid.x;
-        ct.pose.position.y = it->centroid.y;
-        ct.pose.position.z = it->centroid.z;
+        ct.pose.position.x = it.centroid.x;
+        ct.pose.position.y = it.centroid.y;
+        ct.pose.position.z = it.centroid.z;
         ct.scale.x = 0.05;
         ct.scale.y = 0.05;
         ct.scale.z = 0.05;
-        ct.color.a = it->trust;
+        ct.color.a = it.trust;
         ct.color.r = r;
         ct.color.g = g;
         ct.color.b = b;
@@ -86,19 +86,19 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
 
         // draw box
         visualization_msgs::Marker box;
-        box.header.stamp = it->header.stamp;
-        box.header.frame_id = it->header.frame_id;
+        box.header.stamp = it.header.stamp;
+        box.header.frame_id = it.header.frame_id;
         box.ns = ns;
         box.id = id;
         box.type = visualization_msgs::Marker::CUBE;
         box.action = visualization_msgs::Marker::ADD;
-        box.pose.position.x = it->centroid.x;
-        box.pose.position.y = it->centroid.y;
-        box.pose.position.z = it->centroid.z;
-        box.scale.x = std::max(float(0.01), std::cos(it->yaw)*it->length + std::sin(it->yaw)*it->width);
-        box.scale.y = std::max(float(0.01), std::sin(it->yaw)*it->length + std::cos(it->yaw)*it->width);
-        box.scale.z = std::max(it->height, float(0.1));
-        box.color.a = it->trust;
+        box.pose.position.x = it.centroid.x;
+        box.pose.position.y = it.centroid.y;
+        box.pose.position.z = it.centroid.z;
+        box.scale.x = std::max(it.length, float(0.01)); //TODO: add orientation support
+        box.scale.y = std::max(it.width,  float(0.01));
+        box.scale.z = std::max(it.height, float(0.1));
+        box.color.a = it.trust;
         box.color.r = r;
         box.color.g = g;
         box.color.b = b;
