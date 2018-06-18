@@ -20,6 +20,7 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
     id ++;
     obs.markers.push_back(del);
 
+    // add new obstacles
     for(auto it: msg->obstacles)
     {
 
@@ -59,7 +60,6 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         ob.color.r = r;
         ob.color.g = g;
         ob.color.b = b;
-
         id++;
         obs.markers.push_back(ob);
 
@@ -71,9 +71,7 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         ct.id = id;
         ct.type = visualization_msgs::Marker::SPHERE;
         ct.action = visualization_msgs::Marker::ADD;
-        ct.pose.position.x = it.centroid_pose.pose.position.x;
-        ct.pose.position.y = it.centroid_pose.pose.position.y;
-        ct.pose.position.z = it.centroid_pose.pose.position.z;
+        ct.pose = it.centroid_pose.pose;
         ct.scale.x = 0.05;
         ct.scale.y = 0.05;
         ct.scale.z = 0.05;
@@ -92,12 +90,10 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         box.id = id;
         box.type = visualization_msgs::Marker::CUBE;
         box.action = visualization_msgs::Marker::ADD;
-        box.pose.position.x = it.centroid_pose.pose.position.x;
-        box.pose.position.y = it.centroid_pose.pose.position.y;
-        box.pose.position.z = it.centroid_pose.pose.position.z;
-        box.scale.x = std::max(it.length, float(0.01)); //TODO: add orientation support
+        box.pose = it.centroid_pose.pose;
+        box.scale.x = std::max(it.length, float(0.01));
         box.scale.y = std::max(it.width,  float(0.01));
-        box.scale.z = std::max(it.height, float(0.1));
+        box.scale.z = std::max(it.height, float(0.01));
         box.color.a = it.trust;
         box.color.r = r;
         box.color.g = g;
