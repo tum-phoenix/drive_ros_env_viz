@@ -1,30 +1,17 @@
 #include "ros/ros.h"
-#include "drive_ros_msgs/RoadLine.h"
+#include "drive_ros_msgs/DrivingLine.h"
 #include "visualization_msgs/Marker.h"
+#include <trajectory_generator/polygon_msg_operations.h>
 
 
 ros::Publisher pub_marker;
 std::string out_frame_id;
 std::string ns;
+float starting_coord;
 
 
-void callback(const drive_ros_msgs::RoadLineConstPtr& msg)
+void callback(const drive_ros_msgs::DrivingLineConstPtr& msg)
 {
-  float r=0, g=0, b=0;
-
-  switch (msg->lineType) {
-
-  case drive_ros_msgs::RoadLine::LEFT:
-    r = 1;
-    break;
-  case drive_ros_msgs::RoadLine::RIGHT:
-    g = 1;
-    break;
-  case drive_ros_msgs::RoadLine::MIDDLE:
-    b = 1;
-    break;
-  }
-
   visualization_msgs::Marker marker;
   marker.header.frame_id = out_frame_id;
   marker.header.stamp = ros::Time::now();
@@ -43,13 +30,15 @@ void callback(const drive_ros_msgs::RoadLineConstPtr& msg)
   marker.scale.y = 0.01;
   marker.scale.z = 0.01;
   marker.color.a = 1;
-  marker.color.r = r;
-  marker.color.g = g;
-  marker.color.b = b;
+  marker.color.r = 0.0;
+  marker.color.g = 1.0;
+  marker.color.b = 0.0;
 
-  for(int i=0; i<msg->points.size(); i++)
-  {
-    marker.points.push_back(msg->points.at(i).point);
+  geometry_msgs::Point marker_point;
+  for (float i=starting_coord; i<msg->detectionRange; i+=0.1f) {
+    marker_point.x = i;
+    marker_point.y = compute_polynomial_at_location(msg, i);
+    marker.points.push_back(marker_point);
   }
 
   pub_marker.publish(marker);
@@ -62,6 +51,7 @@ int main(int argc, char **argv)
 
   nh.param<std::string>("out_frame_id", out_frame_id, "rear_axis_middle_ground");
   nh.param<std::string>("out_ns", ns, "roadLineViz");
+  nh.param<float>("starting_coord", starting_coord, 0.5f);
 
   pub_marker = nh.advertise<visualization_msgs::Marker>("marker_out", 100);
   ros::Subscriber sub = nh.subscribe("road_in", 100, callback);
