@@ -1,10 +1,10 @@
 <launch>
 
     <!-- topic name -->
-    <arg name="obstacle_topic"  default="obstacles" />
+    <arg name="obstacle_topic"  default="/laserscan_obstacles" />
 
     <!-- namespace -->
-    <arg name="namespace"       default="obstacle" />
+    <arg name="namespace"       default="laser_obstacles" />
 
     <node name="obstacle_viz_$(arg namespace)" pkg="drive_ros_env_viz" type="obstacles" >
 

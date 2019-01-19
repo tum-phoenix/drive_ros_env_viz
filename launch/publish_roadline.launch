@@ -2,11 +2,11 @@
     <node name="road_line_viz" pkg="drive_ros_env_viz" type="roadline" >
 
         <!-- topic names -->
-        <remap from="road_in" to="roadLine"/>
-        <remap from="marker_out" to="roadLine_viz"/>
+        <remap from="road_in" to="/driving_line"/>
+        <remap from="marker_out" to="/roadline_viz"/>
 
         <!-- output namespace -->
-        <param name="out_ns" type="str" value="roadLineViz" />
+        <param name="out_ns" type="str" value="roadline_viz" />
 
         <!-- output frame id -->
         <param name="out_frame_id" type="str" value="rear_axis_middle_ground" />
