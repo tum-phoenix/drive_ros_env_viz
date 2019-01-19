@@ -21,9 +21,9 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
     obs.markers.push_back(del);
 
     // add new obstacles
+    int obstacle_counter = 0;
     for(auto it: msg->obstacles)
     {
-
         // determine color
         float r=0.0, g=0.0, b=0.0;
 
@@ -100,6 +100,26 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         box.color.b = b;
         id++;
         obs.markers.push_back(box);
+
+        // draw box
+        visualization_msgs::Marker text;
+        text.header.stamp = it.header.stamp;
+        text.header.frame_id = it.header.frame_id;
+        text.ns = ns;
+        text.id = id;
+        text.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+        text.action = visualization_msgs::Marker::ADD;
+        text.pose = it.centroid_pose.pose;
+        text.scale.z = 0.1;
+        text.color.a = it.trust;
+        text.color.r = r;
+        text.color.g = g;
+        text.color.b = b;
+        text.text = std::to_string(obstacle_counter);
+        id++;
+        obs.markers.push_back(text);
+
+        obstacle_counter++;
 
     }
     pub_marker.publish(obs);
