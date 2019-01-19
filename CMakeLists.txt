@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   drive_ros_msgs
   visualization_msgs
   roscpp
-  trajectory_generator
+  drive_ros_trajectory_generator
 )
 
 ## System dependencies are found with CMake's conventions
@@ -106,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES drive_ros_road_viz
-  CATKIN_DEPENDS drive_ros_msgs roscpp
+  CATKIN_DEPENDS drive_ros_msgs roscpp drive_ros_trajectory_generator
 #  DEPENDS system_lib
 )
 

@@ -57,7 +57,7 @@
   <exec_depend>drive_ros_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
-  <depend>trajectory_generator</depend>
+  <depend>drive_ros_trajectory_generator</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
