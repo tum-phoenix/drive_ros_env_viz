@@ -111,7 +111,7 @@ void cb(const drive_ros_msgs::ObstacleArrayConstPtr& msg)
         text.action = visualization_msgs::Marker::ADD;
         text.pose = it.centroid_pose.pose;
         text.scale.z = 0.1;
-        text.color.a = it.trust;
+        text.color.a = 1.0;
         text.color.r = r;
         text.color.g = g;
         text.color.b = b;
