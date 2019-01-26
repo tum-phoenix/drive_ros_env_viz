@@ -1,7 +1,7 @@
 #include "ros/ros.h"
 #include "drive_ros_msgs/DrivingLine.h"
 #include "visualization_msgs/Marker.h"
-#include <drive_ros_trajectory_generator/polygon_msg_operations.h>
+#include <drive_ros_environment_model/polygon_msg_operations.h>
 
 
 ros::Publisher pub_marker;

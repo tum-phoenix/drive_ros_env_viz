@@ -52,13 +52,14 @@
   <build_depend>drive_ros_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>visualization_msgs</build_depend>
+  <build_depend>drive_ros_environment_model</build_depend>
   <build_export_depend>drive_ros_msgs</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>drive_ros_environment_model</build_export_depend>
   <exec_depend>drive_ros_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
-  <depend>drive_ros_trajectory_generator</depend>
-
+  <exec_depend>drive_ros_environment_model</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
