@@ -1,9 +1,12 @@
 <launch>
+    <arg name="road_in" default="/driving_line"/>
+    <arg name="road_marker_out" default="/roadline_viz"/>
+
     <node name="road_line_viz" pkg="drive_ros_env_viz" type="roadline" >
 
         <!-- topic names -->
-        <remap from="road_in" to="/driving_line"/>
-        <remap from="marker_out" to="/roadline_viz"/>
+        <remap from="road_in" to="$(arg road_in)"/>
+        <remap from="marker_out" to="$(arg road_marker_out)"/>
 
         <!-- output namespace -->
         <param name="out_ns" type="str" value="roadline_viz" />

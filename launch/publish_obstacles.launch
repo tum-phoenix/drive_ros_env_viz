@@ -2,6 +2,7 @@
 
     <!-- topic name -->
     <arg name="obstacle_topic"  default="/laserscan_obstacles" />
+    <arg name="obstacle_topic_viz"  default="/laserscan_obstacles_viz" />
 
     <!-- namespace -->
     <arg name="namespace"       default="laser_obstacles" />
@@ -10,7 +11,7 @@
 
         <!-- topic names -->
         <remap from="obstacles_in" to="$(arg obstacle_topic)"/>
-        <remap from="marker_out"   to="$(arg obstacle_topic)_viz"/>
+        <remap from="marker_out"   to="$(arg obstacle_topic_viz)"/>
 
         <!-- namespace of marker -->
         <param name="ns" type="str" value="$(arg namespace)" />
